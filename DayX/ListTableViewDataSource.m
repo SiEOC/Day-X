@@ -8,17 +8,20 @@
 
 #import "ListTableViewDataSource.h"
 
+
 @implementation ListTableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return [[EntryController sharedInstance].allEntries count];
+    
 
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"entryCell"];
+    Entry *entry = [EntryController sharedInstance].allEntries[indexPath.row];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Entry %d", (int)indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"entryCell"];
+    cell.textLabel.text = entry.title;
     
     return cell;
 }

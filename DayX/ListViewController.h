@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DetailViewController.h"
+#import "EntryController.h"
 
 @interface ListViewController : UIViewController
 

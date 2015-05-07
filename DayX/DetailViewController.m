@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "EntryController.h"
 
 @interface DetailViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textField;
@@ -19,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    [self updateWithEntry:self.entry];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,6 +31,28 @@
 - (IBAction)clearButton:(id)sender {
     self.textField.text = @"";
     self.textView.text = @"";
+}
+
+- (IBAction)saveButtonTapped:(id)sender {
+    if (![self.textField.text isEqualToString:@"" ] || ![self.textView.text isEqualToString: @""]){
+        if (self.entry) {
+            self.entry.title = self.textField.text;
+            self.entry.bodyText = self.textView.text;
+            self.entry.timestamp = [NSDate date];
+        }
+        //if there is no existing entry, make a new one
+        else{
+            self.entry = [[EntryController sharedInstance] createEntryWithTitle:self.textField.text withBodyText:self.textView.text];
+            if ([self.entry.title isEqualToString: @""]){
+                self.entry.title = @"Untitled";
+            }
+        }
+    }
+}
+
+- (void)updateWithEntry:(Entry *)entry{
+    self.textField.text = entry.title;
+    self.textView.text = entry.bodyText;
 }
 
 
