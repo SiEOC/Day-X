@@ -1,5 +1,5 @@
 //
-//  ENtry.h
+//  Entry.h
 //  DayX
 //
 //  Created by Michael Sacks on 5/6/15.
@@ -13,5 +13,9 @@
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *bodyText;
 @property (strong, nonatomic) NSDate *timestamp;
+
+-(instancetype)initWithDictionary:(NSDictionary *)dict;
+-(NSDictionary *)dictionaryRepresentation;
+
 
 @end

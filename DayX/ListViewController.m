@@ -25,19 +25,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated{
     [self.tableView reloadData];
 }
 
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    //Checks to see if user is pressing on a cell (as opposed to making a new entry)
     if ([segue.identifier isEqualToString:@"viewEntry"]) {
-        
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         DetailViewController *viewController = segue.destinationViewController;
-        
         Entry *entry = [EntryController sharedInstance].allEntries[indexPath.row];
         viewController.entry = entry;
     }
+
 }
 
 @end

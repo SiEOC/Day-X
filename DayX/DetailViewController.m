@@ -7,7 +7,6 @@
 //
 
 #import "DetailViewController.h"
-#import "EntryController.h"
 
 @interface DetailViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textField;
@@ -39,6 +38,7 @@
             self.entry.title = self.textField.text;
             self.entry.bodyText = self.textView.text;
             self.entry.timestamp = [NSDate date];
+            [[EntryController sharedInstance] save];
         }
         //if there is no existing entry, make a new one
         else{
@@ -48,6 +48,8 @@
             }
         }
     }
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 - (void)updateWithEntry:(Entry *)entry{
